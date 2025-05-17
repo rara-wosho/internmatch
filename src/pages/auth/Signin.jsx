@@ -1,0 +1,85 @@
+import { Link } from "react-router-dom";
+import InputField from "../../components/ui/InputField";
+import PrimaryButton from "../../components/ui/PrimaryButton";
+import SecondaryButton from "../../components/ui/SecondaryButton";
+
+import { FaPenClip } from "react-icons/fa6";
+import { FaRegUser } from "react-icons/fa6";
+
+function Signin() {
+    return (
+        <div className="clr-body-2 min-h-100 center position-relative">
+            <div className="auth-header border-bottom w-100 clr-body-2 px-3">
+                <div className="auth-logo py-3 w-100 max-width mx-auto fw-bold">
+                    InternMatch
+                </div>
+            </div>
+            <div
+                // style={{ maxWidth: 1000 }}
+                className="row row-cols-1 row-cols-lg-2 rounded-3 w-100 min-h-100 auth-row pt-md-0"
+            >
+                <div className="col rounded-3 d-flex align-items-start align-items-md-center justify-content-center">
+                    <form
+                        className="d-flex flex-column w-100 p-2 p-md-0"
+                        style={{ maxWidth: 400 }}
+                    >
+                        <div className="mb-4">
+                            <div className="rounded-3 clr-primary d-inline-flex txt-white p-2">
+                                <FaRegUser size={22} />
+                            </div>
+                        </div>
+                        <h3 className="">
+                            Find your ideal{" "}
+                            <span className="txt-accent">INTERNSHIP</span>
+                        </h3>
+                        <p className="mb-3 fw-light txt-secondary fs-7">
+                            Access company Internships, build skills, and
+                            explore careers on your terms.
+                        </p>
+                        <InputField
+                            placeholder="Enter Your Email"
+                            label="Email"
+                        />
+                        <InputField
+                            placeholder="Enter Your Password"
+                            label="Password"
+                            type="password"
+                        />
+
+                        <p className="mb-2 fs-7 txt-primary">
+                            Forgot password?
+                        </p>
+                        <PrimaryButton containerStyle="mt-2" label="Sign In" />
+
+                        <div className="text-center txt-secondary py-3">Or</div>
+
+                        <Link
+                            to="/sign-up"
+                            className="w-100 text-decoration-none"
+                        >
+                            <SecondaryButton
+                                icon={<FaPenClip size={14} />}
+                                label="Register a company"
+                                containerStyle="w-100"
+                            />
+                        </Link>
+                    </form>
+                </div>
+                <div className="col d-none d-lg-flex p-0 rounded-3 center clr-secondary-4 flex-column">
+                    <h4 className="w-50 text-center">
+                        Gain <span className="txt-accent">career-ready</span>{" "}
+                        skills and global work experience
+                    </h4>
+                    <img
+                        className="img-fluid"
+                        width={450}
+                        src="/images/Onboarding-bro.png"
+                        alt=""
+                    />
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default Signin;

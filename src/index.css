@@ -1,0 +1,258 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+    --clr-body: rgb(235, 247, 252);
+    --clr-body-2: rgb(249, 253, 255);
+    --clr-primary: #00b4d8;
+    --clr-secondary: #90e0ef;
+    --clr-secondary-2: #ade8f4;
+    --clr-secondary-3: #cae8f8;
+    --clr-secondary-4: #e5f6ff;
+    --clr-secondary-dark: #0077b6;
+    --clr-white: rgb(255, 255, 255);
+    --clr-accent: #ffbe0b;
+    --clr-hover: ;
+
+    --txt-primary: #00a9cb;
+    --txt-muted: rgb(50, 50, 50);
+    --txt-secondary: rgb(100, 100, 100);
+    --txt-black: ;
+    --txt-white: rgb(252, 252, 252);
+    --txt-light: rgb(248, 248, 248);
+    --txt-accent: var(--clr-accent);
+
+    --border-dark: ;
+    --border-light: rgb(200, 200, 200);
+    --border-lighter: rgb();
+
+    --sidebar-width: 300px;
+}
+
+* {
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: var(--clr-body);
+}
+
+/* ADMIN SIDEBAR  */
+
+.sidebar-backdrop {
+}
+.admin-sidebar {
+    width: 70px;
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.admin-sidebar.expand {
+    width: var(--sidebar-width);
+}
+
+.admin-sidebar .sidebar-icon {
+    width: 70px;
+    flex-shrink: 0;
+}
+.admin-sidebar ul li .navlink::before {
+    width: 4px;
+    transition: opacity 0.3s;
+    height: 100%;
+    position: absolute;
+    content: "";
+    background-color: transparent;
+    top: 0;
+    right: 0;
+    opacity: 0;
+}
+.admin-sidebar ul li .navlink.active::before {
+    opacity: 1;
+    background-color: var(--clr-primary);
+}
+
+.admin-sidebar ul li:hover .navlink {
+    color: var(--txt-primary);
+}
+
+.admin-layout {
+    min-height: 100vh;
+    padding-left: 70px;
+    transition: padding 0.3s;
+}
+
+.admin-layout.expand {
+    padding-left: var(--sidebar-width);
+}
+
+/* STUDENT REGISTRATION  */
+.student-registration-sidebar {
+    width: 400px;
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    isolation: isolate;
+}
+
+.student-registration-page {
+    padding-left: 0;
+}
+
+.circle-bg {
+    position: absolute;
+    opacity: 0.3;
+    z-index: -1;
+    aspect-ratio: 5/5;
+}
+
+.circle-bg.circle-1 {
+    width: 590px;
+    left: -13rem;
+    top: -15rem;
+}
+.circle-bg.circle-2 {
+    width: 200px;
+    bottom: -3rem;
+    right: -4rem;
+}
+/* WELCOME PAGE  */
+.welcome-page .main-text {
+    font-size: 3rem;
+}
+
+/* AUTHENTICATION PAGE  */
+.auth-row {
+    padding-top: 6rem;
+}
+.auth-header {
+    position: fixed;
+    top: 0;
+}
+/* overrides  */
+.form-label {
+    font-size: 0.8rem;
+}
+
+.form-control::placeholder {
+    opacity: 0.5;
+}
+
+.form-control {
+    font-size: 0.9rem;
+    background-color: transparent;
+    border-color: var(--border-light);
+}
+
+/* PRIMARY BUTTON  */
+.primary-btn,
+.secondary-btn {
+    border: 1px solid var(--clr-primary);
+    letter-spacing: 0.8px;
+    transition: all 0.2s;
+}
+
+.primary-btn:hover,
+.secondary-btn:hover {
+    opacity: 0.7;
+}
+
+.secondary-btn {
+    border: 1px solid var(--clr-primary);
+    background-color: transparent;
+}
+
+/* UTILITY CLASSES  */
+
+.hover-primary:hover {
+    background-color: var(--clr-secondary-4);
+}
+
+.hover-txt-primary:hover {
+    color: var(--txt-primary);
+}
+.smooth {
+    transition: all 0.3s;
+}
+.fs-7 {
+    font-size: 0.9rem;
+}
+
+.max-width {
+    max-width: 1200px;
+}
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.min-h-100 {
+    min-height: 100vh;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+/* background colors  */
+.clr-body {
+    background-color: var(--clr-body);
+}
+
+.clr-body-2 {
+    background-color: var(--clr-body-2);
+}
+.clr-white {
+    background-color: var(--clr-white);
+}
+.clr-primary {
+    background-color: var(--clr-primary);
+}
+.clr-secondary {
+    background-color: var(--clr-secondary);
+}
+.clr-secondary-2 {
+    background-color: var(--clr-secondary-2);
+}
+.clr-secondary-3 {
+    background-color: var(--clr-secondary-3);
+}
+.clr-secondary-4 {
+    background-color: var(--clr-secondary-4);
+}
+.clr-accent {
+    background-color: var(--clr-accent);
+}
+
+.clr-secondary-dark {
+    background-color: var(--clr-secondary-dark);
+}
+
+/* text colors  */
+.txt-white {
+    color: var(--txt-white);
+}
+.txt-light {
+    color: var(--txt-light);
+}
+.txt-primary {
+    color: var(--txt-primary);
+}
+.txt-secondary {
+    color: var(--txt-secondary);
+}
+.txt-muted {
+    color: var(--txt-muted);
+}
+
+.txt-accent {
+    color: var(--txt-accent);
+}
+
+@media only screen and (min-width: 990px) {
+    .student-registration-page {
+        padding-left: 400px;
+    }
+}

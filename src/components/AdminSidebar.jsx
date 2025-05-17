@@ -1,0 +1,76 @@
+import { NavLink } from "react-router-dom";
+
+import { RxDashboard } from "react-icons/rx";
+import { HiOutlineUserGroup } from "react-icons/hi2";
+import { IoSettingsOutline } from "react-icons/io5";
+import { FiSidebar } from "react-icons/fi";
+
+const navLinks = [
+    { icon: <RxDashboard />, path: "/admin/dashboard", label: "Dashboard" },
+    { icon: <HiOutlineUserGroup />, path: "/admin/groups", label: "Groups" },
+    {
+        icon: <IoSettingsOutline />,
+        path: "/admin/settings",
+        label: "Settings",
+    },
+];
+
+const AdminSidebar = ({ expand, setExpand }) => {
+    console.log("sidebar render");
+
+    const baseClass =
+        "d-flex align-items-center w-100 text-decoration-none py-2 smooth navlink";
+
+    return (
+        <aside
+            className={`admin-sidebar ${
+                expand && "expand"
+            } clr-white border-end overflow-hidden smooth`}
+        >
+            <div className="sidebar-backdrop d-block d-lg-none min-h-100 w-100 position-fixed"></div>
+
+            <nav className="">
+                <ul className="p-0 m-0 list-unstyled">
+                    {/* header logo  */}
+                    <li className="d-flex align-items-center mb-3">
+                        <div className="sidebar-icon py-4 center">
+                            <FiSidebar size={18} />
+                        </div>
+                        {expand && (
+                            <div className="sidebar-label fw-semibold">
+                                Intern
+                                <span className="txt-primary">Match</span>
+                            </div>
+                        )}
+                    </li>
+
+                    {navLinks.map(({ path, label, icon }) => (
+                        <li key={path} className="d-flex align-items-center">
+                            <NavLink
+                                to={path}
+                                className={({ isActive }) =>
+                                    `${baseClass} ${
+                                        isActive
+                                            ? "position-relative active txt-primary clr-body"
+                                            : " txt-muted"
+                                    }`
+                                }
+                            >
+                                <div className="sidebar-icon py-2 center">
+                                    {icon}
+                                </div>
+                                {expand && (
+                                    <p className="mb-0 fs-7 sidebar-label">
+                                        {label}
+                                    </p>
+                                )}
+                            </NavLink>
+                        </li>
+                    ))}
+                </ul>
+            </nav>
+        </aside>
+    );
+};
+
+export default AdminSidebar;
