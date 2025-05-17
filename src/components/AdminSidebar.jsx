@@ -25,22 +25,35 @@ const AdminSidebar = ({ expand, setExpand }) => {
         <aside
             className={`admin-sidebar ${
                 expand && "expand"
-            } clr-white border-end overflow-hidden smooth`}
+            } d-flex flex-column smooth`}
         >
-            <div className="sidebar-backdrop d-block d-lg-none min-h-100 w-100 position-fixed"></div>
-
-            <nav className="">
+            {expand && (
+                <div
+                    onClick={() => setExpand(!expand)}
+                    className="sidebar-backdrop d-block d-lg-none"
+                ></div>
+            )}
+            <nav className="min-h-100 clr-white border-end overflow-hidden">
                 <ul className="p-0 m-0 list-unstyled">
                     {/* header logo  */}
-                    <li className="d-flex align-items-center mb-3">
+                    <li className="d-flex align-items-center mb-3 pe-3">
                         <div className="sidebar-icon py-4 center">
                             <FiSidebar size={18} />
                         </div>
                         {expand && (
-                            <div className="sidebar-label fw-semibold">
-                                Intern
-                                <span className="txt-primary">Match</span>
-                            </div>
+                            <>
+                                <div className="sidebar-label fw-semibold">
+                                    Intern
+                                    <span className="txt-primary">Match</span>
+                                </div>
+
+                                <div
+                                    onClick={() => setExpand(!expand)}
+                                    className="pointer hover-primary smooth ms-auto d-inline-block d-lg-none"
+                                >
+                                    <FiSidebar size={18} />
+                                </div>
+                            </>
                         )}
                     </li>
 

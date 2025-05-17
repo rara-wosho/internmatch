@@ -5,15 +5,15 @@ import { IoSettingsOutline } from "react-icons/io5";
 function MainContentHeader({ setExpand, expand }) {
     console.log("main content header render");
     return (
-        <div className="main-content-header d-flex align-items-center justify-content-between p-3 border-bottom clr-white">
+        <div className="main-content-header d-flex align-items-center justify-content-between p-3 clr-white">
             <div className="d-flex align-items-center">
                 <div
-                    className="me-2 hover-primary px-2 py-1 hover-txt-primary rounded smooth"
+                    className="me-2 hover-primary px-2 py-1 hover-txt-primary rounded smooth pointer"
                     onClick={() => setExpand(!expand)}
                 >
                     <FiSidebar size={18} />
                 </div>
-                <h5 className="mb-0 fs-7">Dashboard</h5>
+                <h5 className="mb-0 fs-7 fw-semibold">Dashboard</h5>
             </div>
 
             <div className="d-flex align-items-center pe-3">

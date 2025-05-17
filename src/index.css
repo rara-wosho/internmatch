@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 :root {
-    --clr-body: rgb(235, 247, 252);
+    --clr-body: rgb(232, 241, 246);
     --clr-body-2: rgb(249, 253, 255);
     --clr-primary: #00b4d8;
     --clr-secondary: #90e0ef;
@@ -9,8 +9,11 @@
     --clr-secondary-3: #cae8f8;
     --clr-secondary-4: #e5f6ff;
     --clr-secondary-dark: #0077b6;
-    --clr-white: rgb(255, 255, 255);
+    --clr-white: rgb(251, 251, 251);
     --clr-accent: #ffbe0b;
+    --clr-accent-2: #fff3d2;
+    --clr-gray: rgb(230, 230, 230);
+    --clr-lightgray: rgb(238, 238, 238);
     --clr-hover: ;
 
     --txt-primary: #00a9cb;
@@ -20,6 +23,7 @@
     --txt-white: rgb(252, 252, 252);
     --txt-light: rgb(248, 248, 248);
     --txt-accent: var(--clr-accent);
+    --txt-accent-dark: #b18200;
 
     --border-dark: ;
     --border-light: rgb(200, 200, 200);
@@ -37,16 +41,20 @@ body {
 }
 
 /* ADMIN SIDEBAR  */
-
 .sidebar-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-color: rgba(10, 10, 10, 0.5);
 }
+
 .admin-sidebar {
-    width: 70px;
-    min-height: 100vh;
+    width: 0;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 100;
+    isolation: isolate;
 }
 
 .admin-sidebar.expand {
@@ -54,7 +62,8 @@ body {
 }
 
 .admin-sidebar .sidebar-icon {
-    width: 70px;
+    margin-left: 8px;
+    width: 50px;
     flex-shrink: 0;
 }
 .admin-sidebar ul li .navlink::before {
@@ -79,12 +88,12 @@ body {
 
 .admin-layout {
     min-height: 100vh;
-    padding-left: 70px;
+    padding-left: 0;
     transition: padding 0.3s;
 }
 
 .admin-layout.expand {
-    padding-left: var(--sidebar-width);
+    padding-left: 0;
 }
 
 /* STUDENT REGISTRATION  */
@@ -179,6 +188,12 @@ body {
 .fs-7 {
     font-size: 0.9rem;
 }
+.fs-8 {
+    font-size: 0.8rem;
+}
+.fs-9 {
+    font-size: 0.7rem;
+}
 
 .max-width {
     max-width: 1200px;
@@ -226,6 +241,17 @@ body {
     background-color: var(--clr-accent);
 }
 
+.clr-accent-2 {
+    background-color: var(--clr-accent-2);
+}
+
+.clr-gray {
+    background-color: var(--clr-gray);
+}
+.clr-lightgray {
+    background-color: var(--clr-lightgray);
+}
+
 .clr-secondary-dark {
     background-color: var(--clr-secondary-dark);
 }
@@ -251,8 +277,24 @@ body {
     color: var(--txt-accent);
 }
 
+.txt-accent-dark {
+    color: var(--txt-accent-dark);
+}
+
 @media only screen and (min-width: 990px) {
     .student-registration-page {
         padding-left: 400px;
+    }
+
+    .admin-sidebar {
+        width: 70px;
+    }
+
+    .admin-layout {
+        padding-left: 70px;
+    }
+
+    .admin-layout.expand {
+        padding-left: var(--sidebar-width);
     }
 }

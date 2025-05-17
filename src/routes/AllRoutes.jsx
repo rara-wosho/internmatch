@@ -5,6 +5,7 @@ import WelcomePage from "../pages/auth/WelcomePage";
 import StudentRegistration from "../pages/auth/StudentRegistration";
 import AdminLayout from "../pages/admin/AdminLayout";
 import Groups from "../pages/admin/Groups";
+import Group from "../pages/admin/Group";
 
 function AllRoutes() {
     return (
@@ -22,6 +23,7 @@ function AllRoutes() {
             <Route element={<AdminLayout />}>
                 <Route path="/admin/dashboard" />
                 <Route path="/admin/groups" element={<Groups />} />
+                <Route path="/admin/groups/:group_id" element={<Group />} />
             </Route>
 
             {/* COMPANY ROUTES  */}

@@ -8,7 +8,7 @@ const AdminLayout = () => {
     const [expand, setExpand] = useState(true);
     return (
         <div className={`admin-layout clr-body ${expand && "expand"}`}>
-            <AdminSidebar expand={expand} />
+            <AdminSidebar expand={expand} setExpand={setExpand} />
 
             <main className="main-content min-h-100 w-100">
                 <MainContentHeader setExpand={setExpand} expand={expand} />
