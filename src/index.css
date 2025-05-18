@@ -29,7 +29,7 @@
     --border-light: rgb(200, 200, 200);
     --border-lighter: rgb();
 
-    --sidebar-width: 300px;
+    --sidebar-width: 280px;
 }
 
 * {
@@ -177,6 +177,10 @@ body {
 
 .hover-primary:hover {
     background-color: var(--clr-secondary-4);
+}
+
+.hover-lightgray:hover {
+    background-color: var(--clr-lightgray);
 }
 
 .hover-txt-primary:hover {

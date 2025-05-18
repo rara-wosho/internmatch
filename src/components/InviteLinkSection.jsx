@@ -1,0 +1,53 @@
+import { useState } from "react";
+
+import { IoLink } from "react-icons/io5";
+import { MdContentCopy } from "react-icons/md";
+
+function InviteLinkSection() {
+    const [copied, setCopied] = useState(false);
+
+    const handleCopy = async (value) => {
+        try {
+            await navigator.clipboard.writeText(value);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000); // Reset after 2 sec
+        } catch (err) {
+            console.error("Failed to copy:", err);
+        }
+    };
+
+    return (
+        <div className="clr-white p-3 rounded">
+            <div className="d-flex align-items-center mb-2">
+                <p className="mb-0 txt-muted fw-semibold">Invitation link</p>
+
+                <div className="rounded-pill txt-accent-dark clr-accent-2 fs-8 d-inline-block ms-auto px-2">
+                    Active
+                </div>
+            </div>
+
+            <i className="fs-8 txt-secondary mb-1 d-block">
+                Invite students to create an acount for this group.
+            </i>
+            <div className="d-flex align-items-center clr-lightgray rounded-1 p-1 mb-3 w-100">
+                <p className="mb-0 txt-muted txt-primary fs-7 text-truncate">
+                    https://invitationlinkofsiramin
+                </p>
+            </div>
+
+            <button className="btn btn-danger btn-sm">
+                <IoLink size={18} className="me-1" /> Deactivate link
+            </button>
+            <button
+                disabled={copied}
+                onClick={() => handleCopy("https://invitationlinkofsiramin")}
+                className="btn btn-outline-secondary ms-2 btn-sm"
+            >
+                <MdContentCopy className="me-1" />
+                {copied ? "Copied" : "Copy"}
+            </button>
+        </div>
+    );
+}
+
+export default InviteLinkSection;

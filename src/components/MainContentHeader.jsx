@@ -16,20 +16,24 @@ function MainContentHeader({ setExpand, expand }) {
                 <h5 className="mb-0 fs-7 fw-semibold">Dashboard</h5>
             </div>
 
-            <div className="d-flex align-items-center pe-3">
+            <div className="d-flex align-items-center">
                 <div className="hover-txt-primary px-2 smooth rounded pointer">
                     <IoSettingsOutline size={18} />
                 </div>
                 <div className="hover-txt-primary px-2 smooth rounded pointer">
                     <FaRegBell size={18} />
                 </div>
-                <div className="hover-txt-primary px-2 smooth rounded pointer">
+                <div className="px-2 rounded pointer d-flex align-items-center fw-semibold">
                     <img
                         className="rounded-circle"
                         src="https://i.pinimg.com/736x/87/5b/4f/875b4fb82c44a038466807b0dcf884cc.jpg"
                         width="30"
                         alt=""
                     />
+
+                    <p className="mb-0 txt-muted ms-2 d-none d-md-inline-block">
+                        Israel De Vera
+                    </p>
                 </div>
             </div>
         </div>

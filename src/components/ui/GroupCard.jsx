@@ -7,7 +7,7 @@ function GroupCard({ colView }) {
             <div
                 className={`position-relative ${
                     colView ? "rounded-2" : "rounded-0"
-                } clr-white p-2 p-md-3`}
+                } clr-white p-3 p-md-3`}
             >
                 <div
                     style={{ right: 10, top: 8 }}

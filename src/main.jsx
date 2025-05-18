@@ -12,7 +12,9 @@ import { BrowserRouter } from "react-router-dom";
 createRoot(document.getElementById("root")).render(
     <StrictMode>
         <BrowserRouter>
-            <App />
+            <div className="main mx-auto" style={{ maxWidth: 2300 }}>
+                <App />
+            </div>
         </BrowserRouter>
     </StrictMode>
 );
