@@ -1,7 +1,6 @@
-import React from "react";
-
 function AdminDashboard() {
-    return <div>AdminDashboard</div>;
+    console.log("admin dashboard rendered");
+    return <div className="p-5">AdminDashboard</div>;
 }
 
 export default AdminDashboard;

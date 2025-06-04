@@ -6,6 +6,8 @@ import StudentRegistration from "../pages/auth/StudentRegistration";
 import AdminLayout from "../pages/admin/AdminLayout";
 import Groups from "../pages/admin/Groups";
 import Group from "../pages/admin/Group";
+import ProtectedRoute from "./ProtectedRoutes";
+import AdminDashboard from "../pages/admin/AdminDashboard";
 
 function AllRoutes() {
     return (
@@ -15,21 +17,30 @@ function AllRoutes() {
             <Route path="/sign-in" element={<Signin />} />
             <Route path="/sign-up" element={<Signup />} />
             <Route
-                path="/student-registration"
+                path="/student-registration/:group_id"
                 element={<StudentRegistration />}
             />
 
-            {/* ADMIN ROUTES  */}
-            <Route element={<AdminLayout />}>
-                <Route path="/admin/dashboard" />
-                <Route path="/admin/groups" element={<Groups />} />
-                <Route path="/admin/groups/:group_id" element={<Group />} />
-            </Route>
+            {/* Protected route logic */}
+            <Route element={<ProtectedRoute />}>
+                {/* ADMIN ROUTES  */}
+                <Route element={<AdminLayout />}>
+                    <Route
+                        path="/admin/dashboard"
+                        element={<AdminDashboard />}
+                    />
+                    <Route path="/admin/groups" element={<Groups />} />
+                    <Route
+                        path="/admin/groups/:memberCount/:group_id"
+                        element={<Group />}
+                    />
+                </Route>
 
-            {/* COMPANY ROUTES  */}
-            <Route>
-                <Route path="/company/dashboard" />
-                <Route path="/company/exams" />
+                {/* COMPANY ROUTES  */}
+                <Route>
+                    <Route path="/company/dashboard" />
+                    <Route path="/company/exams" />
+                </Route>
             </Route>
         </Routes>
     );

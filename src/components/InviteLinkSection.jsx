@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import { IoLink } from "react-icons/io5";
 import { MdContentCopy } from "react-icons/md";
+import { useAuth } from "../context/AuthContext";
 
-function InviteLinkSection() {
+function InviteLinkSection({ group_id }) {
     const [copied, setCopied] = useState(false);
+    const { user } = useAuth();
+    const linkInputRef = useRef(null);
 
     const handleCopy = async (value) => {
         try {
@@ -17,7 +20,7 @@ function InviteLinkSection() {
     };
 
     return (
-        <div className="clr-white p-3 rounded">
+        <div className="clr-white p-3 rounded mb-2 shadow-sm">
             <div className="d-flex align-items-center mb-2">
                 <p className="mb-0 txt-muted fw-semibold">Invitation link</p>
 
@@ -30,9 +33,13 @@ function InviteLinkSection() {
                 Invite students to create an acount for this group.
             </i>
             <div className="d-flex align-items-center clr-lightgray rounded-1 p-1 mb-3 w-100">
-                <p className="mb-0 txt-muted txt-primary fs-7 text-truncate">
-                    https://invitationlinkofsiramin
-                </p>
+                <input
+                    type="text"
+                    readOnly
+                    value={`localhost:5173/student-registration/${group_id}`}
+                    className="fs-7 bg-transparent border-0 outline-0 w-100"
+                    ref={linkInputRef}
+                />
             </div>
 
             <button className="btn btn-danger btn-sm">
@@ -40,7 +47,7 @@ function InviteLinkSection() {
             </button>
             <button
                 disabled={copied}
-                onClick={() => handleCopy("https://invitationlinkofsiramin")}
+                onClick={() => handleCopy(linkInputRef.current.value)}
                 className="btn btn-outline-secondary ms-2 btn-sm"
             >
                 <MdContentCopy className="me-1" />

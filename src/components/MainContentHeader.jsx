@@ -1,11 +1,13 @@
 import { FiSidebar } from "react-icons/fi";
 import { FaRegBell } from "react-icons/fa";
 import { IoSettingsOutline } from "react-icons/io5";
+import { useAuth } from "../context/AuthContext";
 
 function MainContentHeader({ setExpand, expand }) {
-    console.log("main content header render");
+    const { user } = useAuth();
+
     return (
-        <div className="main-content-header d-flex align-items-center justify-content-between p-3 clr-white">
+        <div className="main-content-header d-flex align-items-center justify-content-between p-3 clr-white shadow-sm">
             <div className="d-flex align-items-center">
                 <div
                     className="me-2 hover-primary px-2 py-1 hover-txt-primary rounded smooth pointer"
@@ -32,7 +34,7 @@ function MainContentHeader({ setExpand, expand }) {
                     />
 
                     <p className="mb-0 txt-muted ms-2 d-none d-md-inline-block">
-                        Israel De Vera
+                        {user.email}
                     </p>
                 </div>
             </div>

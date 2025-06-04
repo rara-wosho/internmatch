@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import InputField from "../../components/ui/InputField";
 import PrimaryButton from "../../components/ui/PrimaryButton";
 import SecondaryButton from "../../components/ui/SecondaryButton";
@@ -6,7 +7,37 @@ import SecondaryButton from "../../components/ui/SecondaryButton";
 import { FaPenClip } from "react-icons/fa6";
 import { FaRegUser } from "react-icons/fa6";
 
+// supabase
+import { supabase } from "../../supabase-client";
+
 function Signin() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    const navigate = useNavigate();
+
+    async function signInUser(e) {
+        e.preventDefault();
+        setLoading(true);
+        setError(null);
+
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email,
+            password,
+        });
+
+        if (error) {
+            setError(error.message);
+        } else {
+            console.log("Signed in user:", data);
+            navigate("/admin/dashboard");
+        }
+
+        setLoading(false);
+    }
+
     return (
         <div className="clr-body-2 min-h-100 center position-relative">
             <div className="auth-header border-bottom w-100 clr-body-2 px-3">
@@ -14,12 +45,10 @@ function Signin() {
                     InternMatch
                 </div>
             </div>
-            <div
-                // style={{ maxWidth: 1000 }}
-                className="row row-cols-1 row-cols-lg-2 rounded-3 w-100 min-h-100 auth-row pt-md-0"
-            >
+            <div className="row row-cols-1 row-cols-lg-2 rounded-3 w-100 min-h-100 auth-row pt-md-0">
                 <div className="col rounded-3 d-flex align-items-start align-items-md-center justify-content-center">
                     <form
+                        onSubmit={signInUser}
                         className="d-flex flex-column w-100 p-2 p-md-0"
                         style={{ maxWidth: 400 }}
                     >
@@ -28,7 +57,7 @@ function Signin() {
                                 <FaRegUser size={22} />
                             </div>
                         </div>
-                        <h3 className="">
+                        <h3>
                             Find your ideal{" "}
                             <span className="txt-accent">INTERNSHIP</span>
                         </h3>
@@ -36,20 +65,34 @@ function Signin() {
                             Access company Internships, build skills, and
                             explore careers on your terms.
                         </p>
+
+                        {error && (
+                            <div className="alert alert-danger">{error}</div>
+                        )}
                         <InputField
                             placeholder="Enter Your Email"
                             label="Email"
+                            value={email}
+                            handleChange={(e) => setEmail(e.target.value)}
+                            required
                         />
                         <InputField
                             placeholder="Enter Your Password"
                             label="Password"
                             type="password"
+                            value={password}
+                            handleChange={(e) => setPassword(e.target.value)}
+                            required
                         />
 
                         <p className="mb-2 fs-7 txt-primary">
                             Forgot password?
                         </p>
-                        <PrimaryButton containerStyle="mt-2" label="Sign In" />
+                        <PrimaryButton
+                            containerStyle="mt-2 py-2 px-2 rounded-2 shadow-sm"
+                            label={loading ? "Signing In..." : "Sign In"}
+                            disabled={loading}
+                        />
 
                         <div className="text-center txt-secondary py-3">Or</div>
 

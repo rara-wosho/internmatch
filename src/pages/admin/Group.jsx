@@ -1,36 +1,42 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { IoIosArrowBack } from "react-icons/io";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import AboutGroup from "../../components/AboutGroup";
 import InviteLinkSection from "../../components/InviteLinkSection";
+import GroupSettings from "../../components/GroupSettings";
+import { supabase } from "../../supabase-client";
 
 function Group() {
     const navigate = useNavigate();
 
     const [loading, setLoading] = useState(false);
-    const [users, setUsers] = useState([]);
+    const [members, setMembers] = useState([]);
+    const { group_id, memberCount } = useParams();
 
-    const fetchUsers = () => {
+    const fetchMembers = useCallback(async () => {
         setLoading(true);
 
-        fetch(
-            "https://dummyjson.com/users?limit=20&select=firstName,lastName,id,email,height&sortBy=lastName&order=asc"
-        )
-            .then((res) => res.json())
-            .then((data) => {
-                setUsers(data.users);
-                setLoading(false);
-            })
-            .catch((err) => {
-                console.log(err);
-                setLoading(false);
-            });
-    };
+        const { data, error } = await supabase
+            .from("students")
+            .select("*")
+            .eq("group_id", group_id);
+
+        if (error) {
+            console.log("Error fetching members: ", error);
+            return;
+        }
+
+        if (data) {
+            setMembers(data);
+        }
+
+        setLoading(false);
+    }, []);
 
     useEffect(() => {
-        fetchUsers();
+        fetchMembers();
     }, []);
 
     return (
@@ -48,7 +54,7 @@ function Group() {
                 <div className="row px-2 flex-column-reverse flex-lg-row">
                     {/* member section  */}
                     <div className="col-12 col-lg-8 px-1 mb-2 h-100">
-                        <div className="clr-white p-3 rounded">
+                        <div className="clr-white p-3 rounded shadow-sm">
                             <div className="d-flex align-items-center mb-2 border-bottom pb-2">
                                 <div
                                     onClick={() => navigate(-1)}
@@ -61,7 +67,7 @@ function Group() {
                                 <p className="mb-0 txt-muted">
                                     Group members{" "}
                                     <span className="clr-accent-2 d-inline-flex px-2 rounded-pill txt-accent-dark fs-8">
-                                        {users.length}
+                                        {members.length}
                                     </span>
                                 </p>
                                 <div className="ms-auto d-flex align-items-center">
@@ -82,7 +88,7 @@ function Group() {
                                 </div>
                             </div>
 
-                            <div className="form-check form-switch py-1">
+                            {/* <div className="form-check form-switch py-1">
                                 <label
                                     className="form-check-label txt-muted pointer"
                                     htmlFor="pingroup"
@@ -109,53 +115,52 @@ function Group() {
                                     role="switch"
                                     id="allowexam"
                                 />
-                            </div>
+                            </div> */}
                             {loading ? (
-                                <p className="py-2">Fetching members...</p>
+                                <div
+                                    className="spinner-border spinner-border-sm txt-secondary"
+                                    role="status"
+                                ></div>
                             ) : (
-                                <table className="table fs-7">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col">Ban</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {users &&
-                                            users.map((user) => (
-                                                <tr key={user.id}>
-                                                    <td>
-                                                        {user.lastName},{" "}
-                                                        {user.firstName}
-                                                    </td>
-                                                    <td>{user.email}</td>
-                                                    <td>
-                                                        {user.height < 160 ? (
-                                                            <button
-                                                                disabled
-                                                                className="btn btn-danger btn-sm"
-                                                            >
-                                                                Banned
-                                                            </button>
-                                                        ) : (
-                                                            <button className="btn btn-outline-danger btn-sm">
-                                                                Ban
-                                                            </button>
-                                                        )}
-                                                    </td>
-                                                </tr>
-                                            ))}
-                                    </tbody>
-                                </table>
+                                members.length > 0 && (
+                                    <table className="table fs-7">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Name</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {members &&
+                                                members.map((user) => (
+                                                    <tr key={user.student_id}>
+                                                        <td>
+                                                            {user.last_name},{" "}
+                                                            {user.first_name}
+                                                        </td>
+                                                    </tr>
+                                                ))}
+                                        </tbody>
+                                    </table>
+                                )
+                            )}
+
+                            {members.length === 0 && !loading && (
+                                <p className="txt-secondary mb-0 py-3">
+                                    There is no member in this group. Copy the
+                                    link and share it to let students join.
+                                </p>
                             )}
                         </div>
                     </div>
 
                     {/* about sectionn  */}
                     <div className="col-12 col-lg-4 px-1 mb-2">
-                        <AboutGroup />
-                        <InviteLinkSection />
+                        <AboutGroup
+                            group_id={group_id}
+                            memberCount={memberCount}
+                        />
+                        <InviteLinkSection group_id={group_id} />
+                        <GroupSettings />
                     </div>
                 </div>
             </div>

@@ -4,6 +4,7 @@ import { RxDashboard } from "react-icons/rx";
 import { HiOutlineUserGroup } from "react-icons/hi2";
 import { IoSettingsOutline } from "react-icons/io5";
 import { FiSidebar } from "react-icons/fi";
+import { supabase } from "../supabase-client";
 
 const navLinks = [
     { icon: <RxDashboard />, path: "/admin/dashboard", label: "Dashboard" },
@@ -16,7 +17,13 @@ const navLinks = [
 ];
 
 const AdminSidebar = ({ expand, setExpand }) => {
-    console.log("sidebar render");
+    async function signOutUser() {
+        const { error } = await supabase.auth.signOut("local");
+
+        if (error) {
+            console.log("error while signin out user");
+        }
+    }
 
     const baseClass =
         "d-flex align-items-center w-100 text-decoration-none py-2 smooth navlink";
@@ -42,7 +49,7 @@ const AdminSidebar = ({ expand, setExpand }) => {
                         </div>
                         {expand && (
                             <>
-                                <div className="sidebar-label fw-semibold">
+                                <div className="sidebar-label fw-semibold fs-5">
                                     Intern
                                     <span className="txt-primary">Match</span>
                                 </div>
@@ -80,6 +87,10 @@ const AdminSidebar = ({ expand, setExpand }) => {
                             </NavLink>
                         </li>
                     ))}
+
+                    <li>
+                        <button onClick={signOutUser}>logout</button>
+                    </li>
                 </ul>
             </nav>
         </aside>
