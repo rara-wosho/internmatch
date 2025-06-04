@@ -6,7 +6,7 @@ const ProtectedRoute = () => {
 
     // If not authenticated, redirect to login
     if (!user) {
-        return <Navigate to="/sign-in" replace />;
+        return <Navigate to="/" replace />;
     }
 
     // If authenticated, render the child routes

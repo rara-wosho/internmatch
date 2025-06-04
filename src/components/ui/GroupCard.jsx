@@ -3,10 +3,8 @@ import { SlOptions } from "react-icons/sl";
 import { Link } from "react-router-dom";
 import { supabase } from "../../supabase-client";
 
-function GroupCard({ colView, name, date_created, members, group_id }) {
+function GroupCard({ colView, name, date_created, group_id }) {
     const [memberCount, setMemberCount] = useState([]);
-
-    const date = new Date(date_created);
 
     const fetchMemberCount = useCallback(async () => {
         const { data, error } = await supabase
@@ -15,8 +13,6 @@ function GroupCard({ colView, name, date_created, members, group_id }) {
             .eq("group_id", group_id);
 
         if (data) {
-            console.log("group member :", data);
-            console.log("group id :", group_id);
             setMemberCount(data);
         }
     }, []);
@@ -58,7 +54,11 @@ function GroupCard({ colView, name, date_created, members, group_id }) {
                 </div>
                 {colView && (
                     <p className="txt-secondary mt-2 mb-0 fs-8">
-                        {date.toLocaleDateString()}
+                        {new Date(date_created).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                        })}
                     </p>
                 )}
 

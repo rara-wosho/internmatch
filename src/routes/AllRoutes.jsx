@@ -8,18 +8,23 @@ import Groups from "../pages/admin/Groups";
 import Group from "../pages/admin/Group";
 import ProtectedRoute from "./ProtectedRoutes";
 import AdminDashboard from "../pages/admin/AdminDashboard";
+import PublicRoutes from "./PublicRoutes";
+import NotFound from "../pages/NotFound";
 
 function AllRoutes() {
     return (
         <Routes>
-            {/* PUBLIC ROUTES  */}
-            <Route path="/" element={<WelcomePage />} />
-            <Route path="/sign-in" element={<Signin />} />
-            <Route path="/sign-up" element={<Signup />} />
-            <Route
-                path="/student-registration/:group_id"
-                element={<StudentRegistration />}
-            />
+            {/* <Route path="/" element={<WelcomePage />} /> */}
+
+            {/* public routes  */}
+            <Route element={<PublicRoutes />}>
+                <Route path="/" element={<Signin />} />
+                <Route path="/sign-up" element={<Signup />} />
+                <Route
+                    path="/student-registration/:group_id"
+                    element={<StudentRegistration />}
+                />
+            </Route>
 
             {/* Protected route logic */}
             <Route element={<ProtectedRoute />}>
@@ -42,6 +47,8 @@ function AllRoutes() {
                     <Route path="/company/exams" />
                 </Route>
             </Route>
+
+            <Route path="*" element={<NotFound />} />
         </Routes>
     );
 }

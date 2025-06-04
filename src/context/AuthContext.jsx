@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
             data: { subscription },
         } = supabase.auth.onAuthStateChange((_event, session) => {
             console.log("Auth state changed:", _event);
-            console.log("current session:", session);
+
             setUser(session?.user ?? null);
             setTimeout(() => {
                 setLoading(false);
@@ -24,7 +24,12 @@ export const AuthProvider = ({ children }) => {
         return () => subscription.unsubscribe();
     }, []);
 
-    if (loading) return <p>loading user...</p>;
+    if (loading)
+        return (
+            <div className="min-h-100 w-100 center">
+                <div className="spinner-border" role="status"></div>
+            </div>
+        );
 
     return (
         <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>

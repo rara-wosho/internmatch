@@ -21,7 +21,7 @@ const AdminSidebar = ({ expand, setExpand }) => {
         const { error } = await supabase.auth.signOut("local");
 
         if (error) {
-            console.log("error while signin out user");
+            console.log("error while signin out user", error);
         }
     }
 

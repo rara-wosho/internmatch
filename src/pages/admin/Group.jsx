@@ -123,10 +123,12 @@ function Group() {
                                 ></div>
                             ) : (
                                 members.length > 0 && (
-                                    <table className="table fs-7">
+                                    <table className="table fs-7 w-100 flex-shrink-0">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Name</th>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Ban</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -136,6 +138,12 @@ function Group() {
                                                         <td>
                                                             {user.last_name},{" "}
                                                             {user.first_name}
+                                                        </td>
+                                                        <td>{user.email}</td>
+                                                        <td>
+                                                            <button className="btn btn-sm btn-outline-danger">
+                                                                Ban
+                                                            </button>
                                                         </td>
                                                     </tr>
                                                 ))}

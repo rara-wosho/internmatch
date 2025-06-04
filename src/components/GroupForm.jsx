@@ -6,24 +6,38 @@ import SecondaryButton from "./ui/SecondaryButton";
 import { useState } from "react";
 import { supabase } from "../supabase-client";
 
-function GroupForm({ setToggleGroupForm, fetchGroups }) {
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
+function GroupForm({ setToggleGroupForm, fetchGroups, editData, group_id }) {
+    const [name, setName] = useState(editData?.group_name || "");
+    const [description, setDescription] = useState(editData?.description || "");
     const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
 
-        const { error } = await supabase
-            .from("group")
-            .insert({ group_name: name, description: description });
+        if (editData) {
+            const { error } = await supabase
+                .from("group")
+                .update({ group_name: name, description: description })
+                .eq("group_id", group_id);
 
-        if (error) {
-            console.log("error adding", error);
+            if (error) {
+                console.log("error updating group:", error);
+            } else {
+                fetchGroups();
+                setToggleGroupForm(false);
+            }
         } else {
-            fetchGroups();
-            setToggleGroupForm(false);
+            const { error } = await supabase
+                .from("group")
+                .insert({ group_name: name, description: description });
+
+            if (error) {
+                console.log("error adding", error);
+            } else {
+                fetchGroups();
+                setToggleGroupForm(false);
+            }
         }
         setLoading(false);
     };
@@ -35,7 +49,9 @@ function GroupForm({ setToggleGroupForm, fetchGroups }) {
                 style={{ maxWidth: 500 }}
             >
                 <div className="d-flex align-items-center mb-2 justify-content-between">
-                    <p className="mb-0 txt-primary fs-5">Create New Group</p>
+                    <p className="mb-0 txt-primary fs-5">
+                        {editData ? "Edit Group" : "Create New Group"}
+                    </p>
                     <button
                         className="btn hover-lightgray center p-1 rounded-circle "
                         onClick={() => setToggleGroupForm(false)}
@@ -69,7 +85,8 @@ function GroupForm({ setToggleGroupForm, fetchGroups }) {
                         />
                         <PrimaryButton
                             containerStyle="px-3 py-1 rounded-1 "
-                            label={loading ? "Creating" : "Create Group"}
+                            label={editData ? "Update" : "Create Group"}
+                            loading={loading}
                         />
                     </div>
                 </form>

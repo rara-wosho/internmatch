@@ -22,6 +22,7 @@ function StudentRegistration() {
         confirmPassword: "",
     });
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
     const [fetchingGroup, setFetchingGroup] = useState(true);
     const [groupData, setGroupData] = useState([]);
 
@@ -59,6 +60,7 @@ function StudentRegistration() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
 
         if (formData.password !== formData.confirmPassword) {
             setError("Passwords did not match.");
@@ -71,6 +73,8 @@ function StudentRegistration() {
 
             if (error) {
                 console.log("error while authenticating: ", error);
+                setError(error.message);
+                setLoading(false);
                 return;
             }
 
@@ -97,9 +101,12 @@ function StudentRegistration() {
                         "Error while registering student info:",
                         infoError
                     );
+                    setError(infoError.message);
                 } else {
                     console.log("Student successfully registered!");
+                    setError("");
                 }
+                setLoading(false);
             }
         }
     };
@@ -138,9 +145,13 @@ function StudentRegistration() {
                                 {groupData[0].group_name}
                             </em>
                         </p>
-                        <p className="mb-4 txt-secondary fs-7 fw-light">
-                            Status: <em className="fw-semibold">Active</em>
-                        </p>
+                        <div className="mb-4 txt-secondary fs-7 fw-light d-flex align-items-center">
+                            Status: <em className="fw-semibold mx-1">Active</em>{" "}
+                            <div
+                                className="bg-success rounded-circle d-inline-block"
+                                style={{ width: 12, height: 12 }}
+                            ></div>
+                        </div>
                     </div>
 
                     {error && (
@@ -240,7 +251,7 @@ function StudentRegistration() {
                                 <InputField
                                     name="password"
                                     label="Password"
-                                    placeholder="Enter a password"
+                                    placeholder="Must be at least 6 characters"
                                     type="password"
                                     required
                                     value={formData.password || ""}
@@ -266,6 +277,8 @@ function StudentRegistration() {
                                     label="Create Account"
                                     containerStyle="rounded-2 shadow-sm py-1 px-2 w-100"
                                     icon={<FaCheck className="me-1" />}
+                                    disabled={loading}
+                                    loading={loading}
                                 />
                             </div>
                             <div className="col px-1"></div>
@@ -273,7 +286,7 @@ function StudentRegistration() {
                                 <p className="text-decoration-none text-center text-md-start w-100 txt-muted mb-0">
                                     Already have an account?{" "}
                                     <Link
-                                        to="/sign-in"
+                                        to="/"
                                         className="text-decoration-none txt-primary"
                                     >
                                         Sign In

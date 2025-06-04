@@ -58,12 +58,12 @@ function Signin() {
                             </div>
                         </div>
                         <h3>
-                            Find your ideal{" "}
-                            <span className="txt-accent">INTERNSHIP</span>
+                            <span className="txt-accent">INTERNSHIP</span> made
+                            simple
                         </h3>
                         <p className="mb-3 fw-light txt-secondary fs-7">
-                            Access company Internships, build skills, and
-                            explore careers on your terms.
+                            Explore opportunities, support students, and shape
+                            careers with ease.
                         </p>
 
                         {error && (
@@ -90,8 +90,9 @@ function Signin() {
                         </p>
                         <PrimaryButton
                             containerStyle="mt-2 py-2 px-2 rounded-2 shadow-sm"
-                            label={loading ? "Signing In..." : "Sign In"}
+                            label="Sign in"
                             disabled={loading}
+                            loading={loading}
                         />
 
                         <div className="text-center txt-secondary py-3">Or</div>
@@ -103,7 +104,7 @@ function Signin() {
                             <SecondaryButton
                                 icon={<FaPenClip size={14} />}
                                 label="Register a company"
-                                containerStyle="w-100"
+                                containerStyle="w-100 py-2 rounded-2"
                             />
                         </Link>
                     </form>

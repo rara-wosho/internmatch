@@ -5,9 +5,12 @@ import { useCallback, useEffect, useState } from "react";
 import { supabase } from "../supabase-client";
 import Skeleton from "./ui/Skeleton";
 
+import GroupForm from "../components/GroupForm";
+
 function AboutGroup({ group_id, memberCount }) {
     const [groupData, setGroupData] = useState([]);
     const [fetching, setFetching] = useState(true);
+    const [toggleGroupForm, setToggleGroupForm] = useState(false);
 
     const fetchGroupData = useCallback(async () => {
         const { data, error } = await supabase
@@ -22,7 +25,6 @@ function AboutGroup({ group_id, memberCount }) {
 
         if (data) {
             setGroupData(data);
-            console.log(data);
         }
 
         setFetching(false);
@@ -36,11 +38,23 @@ function AboutGroup({ group_id, memberCount }) {
         return <Skeleton width="100%" height="150px" containerStyle="mb-2" />;
     return (
         <div className="clr-white p-3 rounded mb-2 shadow-sm">
+            {toggleGroupForm && (
+                <GroupForm
+                    setToggleGroupForm={setToggleGroupForm}
+                    editData={groupData}
+                    group_id={group_id}
+                    fetchGroups={fetchGroupData}
+                />
+            )}
+
             <div className="d-flex align-items-center mb-2">
                 <p className="mb-0 txt-muted fw-semibold">
                     {groupData.group_name}
                 </p>
-                <div className="pointer ms-auto px-2 hover-txt-primary smooth">
+                <div
+                    onClick={() => setToggleGroupForm(true)}
+                    className="pointer ms-auto px-2 hover-txt-primary smooth"
+                >
                     <MdModeEditOutline size={18} />
                 </div>
             </div>
@@ -59,7 +73,14 @@ function AboutGroup({ group_id, memberCount }) {
             <div className="d-flex align-items-center mb-1">
                 <BsCalendar2Date size={15} />
                 <p className="mb-0 ms-2 fs-7 txt-secondary">
-                    {groupData.created_at.toLocaleString()}
+                    {new Date(groupData.created_at).toLocaleDateString(
+                        "en-US",
+                        {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                        }
+                    )}
                 </p>
             </div>
         </div>
