@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import { RxDashboard } from "react-icons/rx";
 import { HiOutlineUserGroup } from "react-icons/hi2";
@@ -48,8 +48,8 @@ const AdminSidebar = ({ expand, setExpand }) => {
                             <FiSidebar size={18} />
                         </div>
                         {expand && (
-                            <>
-                                <div className="sidebar-label fw-semibold fs-5">
+                            <Link to="/home" className="text-decoration-none">
+                                <div className="sidebar-label fw-semibold fs-5 txt-muted">
                                     Intern
                                     <span className="txt-primary">Match</span>
                                 </div>
@@ -60,7 +60,7 @@ const AdminSidebar = ({ expand, setExpand }) => {
                                 >
                                     <FiSidebar size={18} />
                                 </div>
-                            </>
+                            </Link>
                         )}
                     </li>
 

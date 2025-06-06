@@ -5,7 +5,7 @@ function PublicRoutes() {
     const { user } = useAuth();
 
     if (user) {
-        return <Navigate to="admin/dashboard" replace />;
+        return <Navigate to="/home" replace />;
     }
 
     return <Outlet />;

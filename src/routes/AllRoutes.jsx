@@ -10,6 +10,7 @@ import ProtectedRoute from "./ProtectedRoutes";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import PublicRoutes from "./PublicRoutes";
 import NotFound from "../pages/NotFound";
+import Homepage from "../pages/Home";
 
 function AllRoutes() {
     return (
@@ -28,6 +29,8 @@ function AllRoutes() {
 
             {/* Protected route logic */}
             <Route element={<ProtectedRoute />}>
+                <Route path="/home" element={<Homepage />} />
+
                 {/* ADMIN ROUTES  */}
                 <Route element={<AdminLayout />}>
                     <Route
