@@ -15,16 +15,15 @@ import Homepage from "../pages/Home";
 function AllRoutes() {
     return (
         <Routes>
-            {/* <Route path="/" element={<WelcomePage />} /> */}
+            <Route
+                path="/student-registration/:group_id"
+                element={<StudentRegistration />}
+            />
 
             {/* public routes  */}
             <Route element={<PublicRoutes />}>
                 <Route path="/" element={<Signin />} />
                 <Route path="/sign-up" element={<Signup />} />
-                <Route
-                    path="/student-registration/:group_id"
-                    element={<StudentRegistration />}
-                />
             </Route>
 
             {/* Protected route logic */}

@@ -181,6 +181,12 @@ body {
     }
 }
 
+/* CHECKBOX PILL  */
+.checkbox-pill.selected {
+    border-color: var(--clr-primary) !important;
+    color: var(--txt-primary);
+    background-color: var(--clr-body-2);
+}
 /* PRIMARY BUTTON  */
 .primary-btn,
 .secondary-btn {
