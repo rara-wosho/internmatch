@@ -23,7 +23,7 @@ const companyList = [
 function OtherCompanies() {
     return (
         <div>
-            <h5 className="txt-muted">Others Companies</h5>
+            <h5 className="txt-muted">Other Companies</h5>
             <div className="row row-cols-1 row-cols-md-3 row-cols-lg-4 px-1">
                 {companyList.map((company, index) => {
                     return (

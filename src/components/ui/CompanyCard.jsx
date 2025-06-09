@@ -8,23 +8,24 @@ function CompanyCard({ name, url }) {
     return (
         <div className="company-card clr-white h-100 rounded-3 overflow-hidden pointer">
             <div
-                className="img-wrapper position-relative"
+                className="img-wrapper position-relative overflow-hidden"
                 style={{ aspectRatio: 5 / 3 }}
             >
+                <div className="overlay position-absolute clr-white w-100"></div>
                 <div
                     className="position-absolute clr-white rounded-circle center p-2 txt-primary next-icon shadow-sm"
-                    style={{ zIndex: 10, right: 22, bottom: 0 }}
+                    style={{ zIndex: 10, right: 12, bottom: 8 }}
                 >
                     <FaChevronRight />
                 </div>
                 <img
                     src={url}
-                    className="w-100 position-relative"
+                    className="w-100 position-relative smooth"
                     style={{ objectFit: "cover", aspectRatio: 5 / 3 }}
                     alt="company img"
                 />
             </div>
-            <div className="p-3 pt-2">
+            <div className="p-3 pt-0 body">
                 <p className="mb-0 company-card-title txt-muted fw-semibold text-truncate">
                     {name}
                 </p>

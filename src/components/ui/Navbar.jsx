@@ -5,7 +5,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 function Navbar() {
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top border-bottom">
-            <div className="max-width w-100 mx-auto d-flex align-items-center py-2 px-3">
+            <div className="max-width w-100 mx-auto d-flex align-items-center py-1 py-md-2 px-3">
                 <Link
                     to="/home"
                     className="text-decoration-none txt-muted fw-semibold"
@@ -13,7 +13,7 @@ function Navbar() {
                     InternMatch
                 </Link>
                 <div
-                    className="navbar-toggler ms-auto border-0"
+                    className="navbar-toggler ms-auto border-0 p-0 mb-0 center"
                     type="button"
                     data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasNavbar"
