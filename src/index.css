@@ -136,10 +136,10 @@ body {
 
 /* COMPANY CARD  */
 .company-card .img-wrapper img {
-    clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 0% 100%);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 93%, 0% 100%);
 }
 .company-card .img-wrapper::after {
-    clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 0% 100%);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 93%, 0% 100%);
     inset: 0;
     content: "";
     position: absolute;
@@ -151,6 +151,8 @@ body {
 .company-card .img-wrapper .next-icon {
     border: 1px solid var(--clr-primary);
 }
+
+.company-card:hover 
 /* MAIN CONTENT HEADER  */
 .main-content-header {
     position: sticky;

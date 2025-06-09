@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 
+import { GiHamburgerMenu } from "react-icons/gi";
+
 function Navbar() {
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top border-bottom">
@@ -10,16 +12,20 @@ function Navbar() {
                 >
                     InternMatch
                 </Link>
-                <button
-                    className="navbar-toggler ms-auto"
+                <div
+                    className="navbar-toggler ms-auto border-0"
                     type="button"
                     data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasNavbar"
                     aria-controls="offcanvasNavbar"
                     aria-label="Toggle navigation"
                 >
+                    <GiHamburgerMenu size={22} />
+                </div>
+                {/* <button
+                >
                     <span className="navbar-toggler-icon"></span>
-                </button>
+                </button> */}
                 <div
                     className="offcanvas offcanvas-end"
                     tabIndex="-1"

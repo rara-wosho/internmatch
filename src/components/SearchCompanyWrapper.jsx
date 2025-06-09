@@ -20,7 +20,7 @@ function SearchCompanyWrapper() {
                 className="circle-bg clr-secondary rounded-circle"
             ></div>
             <div className="max-width mx-auto center pt-5 px-3 flex-column">
-                <h5 className="txt-white text-uppercase">
+                <h5 className="txt-white text-uppercase text-center">
                     Explore the best companies now
                 </h5>
 
