@@ -127,7 +127,9 @@ function Group() {
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
-                                                <th>Email</th>
+                                                <th className="d-none d-md-block">
+                                                    Email
+                                                </th>
                                                 <th>Ban</th>
                                             </tr>
                                         </thead>
@@ -139,7 +141,9 @@ function Group() {
                                                             {user.last_name},{" "}
                                                             {user.first_name}
                                                         </td>
-                                                        <td>{user.email}</td>
+                                                        <td className="d-none d-md-block">
+                                                            {user.email}
+                                                        </td>
                                                         <td>
                                                             <button className="btn btn-sm btn-outline-danger">
                                                                 Ban

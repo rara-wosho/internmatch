@@ -307,13 +307,18 @@ function StudentRegistration() {
             ) : (
                 //Group exists but is not shareable
                 <div className="p-4 p-lg-5 min-h-100 center flex-column border w-100">
-                    <TiWarning size={52} className="text-danger mb-2" />
-                    <p className="mb-2 txt-danger text-center">
+                    <img
+                        width={210}
+                        height={210}
+                        src="/images/Oh no-cuate.png"
+                        alt="oh no icon"
+                    />
+                    <p className="mb-2 fw-semibold mt-2 txt-muted text-center">
                         This group is currently not accepting new registrations.
                     </p>
-                    <small className="txt-secondary">
+                    <small className="txt-secondary text-center">
                         Please wait until the group creator decides to accept
-                        new members.
+                        new members again.
                     </small>
                 </div>
             )}
